@@ -38,6 +38,11 @@ class User
      */
     private $likes;
 
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $apiToken;
+
     public function __construct()
     {
         $this->tweets = new ArrayCollection();
@@ -126,6 +131,18 @@ class User
         if ($this->likes->contains($like)) {
             $this->likes->removeElement($like);
         }
+
+        return $this;
+    }
+
+    public function getApiToken(): ?string
+    {
+        return $this->apiToken;
+    }
+
+    public function setApiToken(?string $apiToken): self
+    {
+        $this->apiToken = $apiToken;
 
         return $this;
     }
